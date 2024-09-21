@@ -1,4 +1,35 @@
-.Hello{
-    color: red;
-    font-family: Arial, Helvetica, sans-serif;
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 2px solid rgba(0, 0, 0, 0.16);
+    box-shadow: rgba(0, 0, 0, 0.16) 0 1px 50px;
+}
+.logo-container>.logo{
+    width: 140px;
+}
+.nav-items>ul{
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 20px;
+}
+.nav-items>ul>li{
+    padding: 0px 20px;
+    margin: 2px;
+    font-size: 1.5rem;
+}
+
+.body>.search-bar{
+    margin: 10px 2px;
+    font-size: 1.2rem;
+}
+.restro-card{
+    width: 220px;
+    height: 320px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0 1px 20px;   
 }
