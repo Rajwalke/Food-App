@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Header from "./components/Header";
+import Body from "./components/Body";
 /*
 **Header
 -Logo
@@ -25,53 +27,11 @@ import ReactDOM from "react-dom/client";
 
 
 */
-const Header=()=>{
-    return(
-        //logo
-        <div className="header">
-            <div className="logo-container">
-                <img className="logo" src="https://t3.ftcdn.net/jpg/03/33/90/46/360_F_333904627_tnCepUpc3Uynb6stmEbverr8HeWS2VZl.jpg" alt="logo"></img>
-            </div>
 
-            <div className="nav-items">
-                <ul>
-                    <li>Home</li>
-                    <li>About us</li>
-                    <li>Contact</li>
-                    <li>Cart</li>
-                </ul>
-            </div>
-        </div>
-        
-    )
-}
 
-const RestaurantCard=()=>{
-    return (
-        <div className="restro-card">
-            <img className="dish-img" src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/230485dfde0c4916567efc8cf6ccae5e"></img>
-            <h3>New Cafe</h3>
-            <h3>Rs.250</h3>
-            <h3><span>4.3</span> <span>15-20 mins</span></h3>
-            <h3>Chines,Asian,Norath indain</h3>
-            <h3>Andheri(East)</h3>
-        </div>
-    )
-}
 
-const Body=()=>{
-    return (
-        <div className="body">
-            <div className="search-bar">
-                <p>Search Items</p>
-            </div>
-            <div className="restro-container">
-                <RestaurantCard/>
-            </div>
 
-        </div>
-    )
-}
+
 
 const AppLayout=()=>{
     return (

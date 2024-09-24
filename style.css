@@ -26,10 +26,68 @@
     margin: 10px 2px;
     font-size: 1.2rem;
 }
+.body>.restro-container{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
 .restro-card{
-    width: 220px;
-    height: 320px;
-    border: 1px solid rgba(0, 0, 0, 0.16);
+    width: 230px;
+    height: 55vh;
+    /* border: 1px solid rgba(0, 0, 0, 0.16); */
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.16) 0 1px 20px;   
+    padding: 10px;
+    background-color: #f0f0f0;
+    margin: 5px 20px ;
+}
+.restro-card:hover{
+    cursor: pointer;
+    border: 2px solid rgba(0, 0, 0, 0.16);
+}
+.restro-card>.dish-img{
+    
+    width: 100%;
+    height: 50%;
+    border-radius: 5px;
+    
+}
+
+.body>.features-Btn{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 2px;
+    align-items: center;
+}
+.body>.features-Btn>.filter-btn{
+    font-size: 1rem;
+    text-align: center;
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.filter-btn-search{
+    font-size: 1rem;
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+/* ShimmerUI  CSS*/
+.Shimmerui_container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.Shimmerui_container>.container{
+    width: 230px;
+    height: 380px;
+    /* border: 1px solid rgba(0, 0, 0, 0.16); */
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0 1px 20px;   
+    padding: 10px;
+    background-color: #f0f0f0;
+    margin: 5px 20px ;
+}
+.login-btn{
+    font-size: 1.2rem;
+    padding: 5px 10px;
 }

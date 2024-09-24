@@ -4,8 +4,8 @@
   "description": "This is Namaste React and build Food app",
   
   "scripts": {
-    "start":"parcel index.html",
-    "build":"parcel build index.html",
+    "start":"parcel indexez.html",
+    "build":"parcel build indexez.html",
     "test": "jest"
   },
   "repository": {
