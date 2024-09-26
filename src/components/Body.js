@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState,useEffect } from "react";
 import ShimmerUI from "./ShimmerUI";
+import { Link } from "react-router-dom";
 const Body=()=>{
     
     const [restroList,setrestroList]=useState([]);
@@ -12,14 +13,15 @@ const Body=()=>{
         const restaurantInfo=jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         setrestroList(restaurantInfo);
         setresobj(restaurantInfo)
-       console.log(jsonData)
+       console.log(jsonData);
         //resobj is used for creating a features beacuses restroList is updated when click on features so resobj having always the full data 
        
     }
     useEffect(()=>{
         fetchData();
     },[])
-    if(restroList.length ===0 ){
+    console.log(restroList);
+    if(!restroList || restroList.length ===0 ){
         return <ShimmerUI/>
     }
     return (
@@ -103,7 +105,7 @@ const Body=()=>{
             <div className="restro-container">
               {
                  restroList.map((restaurant,index)=>(
-                  <RestaurantCard key={restaurant.info.id} resData={restaurant}/>
+                 <Link className="link-page" key={restaurant.info.id} to={"/res/"+restaurant.info.id}><RestaurantCard resData={restaurant}/></Link> 
                  ))
               }
                 

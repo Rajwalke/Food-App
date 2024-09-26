@@ -2,10 +2,9 @@
   "name": "namaste-food",
   "version": "1.0.0",
   "description": "This is Namaste React and build Food app",
-  
   "scripts": {
-    "start":"parcel indexez.html",
-    "build":"parcel build indexez.html",
+    "start": "parcel indexez.html",
+    "build": "parcel build indexez.html",
     "test": "jest"
   },
   "repository": {
@@ -20,9 +19,10 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
   },
-  "browserslist":[
+  "browserslist": [
     "last 2 versions"
   ]
 }

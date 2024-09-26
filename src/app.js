@@ -2,35 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
-/*
-**Header
--Logo
--Navbar
-
-**Body
--Search bar
--Top Rated Restro
--All Restro
--Pure-veg Restro
--RestroContainer
-    -RestroCrad
-        -RestroName
-        -Rating
-        -cuisines
-        -Delivery Timming
-
-**Footer
--Copyright
--Social media link
--address
--contact info
-
-
-*/
-
-
-
-
+import Error from "./components/Error";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import RestroMenu from "./components/RestroMenu";
+import { Outlet } from "react-router-dom";
+import { createBrowserRouter,RouterProvider } from "react-router-dom";
 
 
 const AppLayout=()=>{
@@ -39,21 +16,41 @@ const AppLayout=()=>{
         <div className="app">
             
             <Header/>
-            <Body/>
+            <Outlet/>
         </div>
     )
 }
+const appRouter=createBrowserRouter([
+    {
+        path:"/",
+        element:<AppLayout/>,
+        children:[
+            {
+                path:"/",
+                element:<Body/>
+            },
+            {
+                path:"/About",
+                element:<About/>
+            },
+            {
+                path:"Contact",
+                element:<Contact/>
+            },
+            {
+                path:"res/:resId",
+                element:<RestroMenu/>
 
-
-
-
-
-
-
+            }
+        ],
+        errorElement:<Error/>
+    },
+    
+])
 
 
 const root=ReactDOM.createRoot(document.querySelector("#root"));
-root.render(<AppLayout/>);
+root.render(<RouterProvider router={appRouter}/>);
 // const heading=React.createElement("h1",{id:"heading"},"Nmaste React");
 // const Title=(
 
