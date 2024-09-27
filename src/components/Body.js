@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState,useEffect } from "react";
 import ShimmerUI from "./ShimmerUI";
 import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
 const Body=()=>{
     
     const [restroList,setrestroList]=useState([]);
@@ -21,6 +22,8 @@ const Body=()=>{
         fetchData();
     },[])
     console.log(restroList);
+    const connectionStatus=useOnline();
+    if(connectionStatus === "offline") return <h1>Looks like you're offline!!....please check internet connection</h1>
     if(!restroList || restroList.length ===0 ){
         return <ShimmerUI/>
     }
