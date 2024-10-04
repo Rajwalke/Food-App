@@ -13,7 +13,7 @@ const Body=()=>{
     const [dishList,setdishList]=useState([]);
     // console.log("body render",restroList);
     const fetchData= async ()=>{
-        const apiData=await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.113645&lng=72.8697339&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+        const apiData=await fetch("https://cors-handlers.vercel.app/api/?url=https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D19.113645%26lng%3D72.8697339%26is-seo-homepage-enabled%3Dtrue%26page_type%3DDESKTOP_WEB_LISTING");
         const jsonData=await apiData.json();
 
         const restaurantInfo=jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;

@@ -15,7 +15,8 @@ const DishMenu=()=>{
     },[])
     const fetchData=async()=>{
         // const apiData=await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.113645&lng=72.8697339&collection="+dishId+"&tags=layout_CCS_"+dishname+"&sortBy=&filters=&type=rcv2&offset=0&page_type=null");
-        const apiData=await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.113645&lng=72.8697339&collection="+dishId+"&tags=layout_CCS_"+dishname+"&sortBy=&filters=&type=rcv2&offset=0&page_type=null");
+        const apiData=await fetch("https://cors-handlers.vercel.app/api/?url=https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D19.113645%26lng%3D72.8697339%26collection%3D"+dishId+"%26tags%3Dlayout_CCS_"+dishname+"%26sortBy%3D%26filters%3D%26type%3Drcv2%26offset%3D0%26page_type%3Dnull");
+                                     
         const jsonData=await apiData.json();
         // console.log("Hello",jsonData);
         console.log(jsonData)
