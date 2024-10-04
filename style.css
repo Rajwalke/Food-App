@@ -1,4 +1,7 @@
-.header{
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* .header{
     display: flex;
     justify-content: space-between;
     padding: 0px 20px;
@@ -30,17 +33,19 @@
     display: flex;
     flex-wrap: wrap;
     
-}
+}*/
+/*
 .restro-card{
     width: 230px;
     height: 55vh;
-    /* border: 1px solid rgba(0, 0, 0, 0.16); */
+   
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.16) 0 1px 20px;   
     padding: 10px;
     background-color: #f0f0f0;
     margin: 5px 20px ;
 }
+
 .restro-card:hover{
     cursor: pointer;
     border: 2px solid rgba(0, 0, 0, 0.16);
@@ -71,16 +76,16 @@
     margin: 5px;
     padding: 5px 10px;
     cursor: pointer;
-}
+} */
 /* ShimmerUI  CSS*/
-.Shimmerui_container{
+
+/* .Shimmerui_container{
     display: flex;
     flex-wrap: wrap;
 }
 .Shimmerui_container>.container{
     width: 230px;
     height: 380px;
-    /* border: 1px solid rgba(0, 0, 0, 0.16); */
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.16) 0 1px 20px;   
     padding: 10px;
@@ -98,4 +103,24 @@
 .user_info{
     border:  1px solid black;
     padding: 5px;
-}
+} */
+/* CSS for Dish */
+/* .dish-container {
+    display: flex;               
+    overflow-x: scroll;          
+    white-space: nowrap;         
+    scrollbar-width: none;       
+    -ms-overflow-style: none;
+    height: 23vh;    
+    background-color: white;
+  }
+  
+  .dish-container::-webkit-scrollbar {
+    display: none;               /* Hide scrollbar for Webkit browsers (Chrome, Safari) 
+  }
+  
+  .dish {
+    flex-shrink: 0;             
+    width: 150px;               
+    margin: 10px;         
+  } */

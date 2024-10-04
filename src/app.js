@@ -9,17 +9,22 @@ import RestroMenu from "./components/RestroMenu";
 import { Outlet } from "react-router-dom";
 import { createBrowserRouter,RouterProvider } from "react-router-dom";
 import ShimmerUI from "./components/ShimmerUI";
-
+import DishMenu from "./components/DishMenu";
+import Test from "./utils/Test";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 const About=lazy(()=>import("./components/About"));
 
 const AppLayout=()=>{
     return (
-        
-        <div className="app">
-            
-            <Header/>
-            <Outlet/>
-        </div>
+        <Provider store={appStore}>
+            <div className="app">
+
+                <Header/>
+                <Outlet/>
+            </div>
+        </Provider>
     )
 }
 const appRouter=createBrowserRouter([
@@ -43,6 +48,18 @@ const appRouter=createBrowserRouter([
                 path:"res/:resId",
                 element:<RestroMenu/>
 
+            },
+            {
+                path:"dish/:dishId/:dishname",
+                element:<DishMenu/>
+            },
+            {
+                path:"test",
+                element:<Test/>
+            },
+            {
+                path:"/cart",
+                element:<Cart/>
             }
         ],
         errorElement:<Error/>
