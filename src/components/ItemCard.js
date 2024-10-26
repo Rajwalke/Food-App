@@ -2,11 +2,21 @@ import { useState } from "react";
 import { CDN_DISH_IMG_URL } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { addItem } from "../utils/cartSlice";
+import Addpopup from "./Addpopup";
 const ItemCard=({data,check,setcheck})=>{
+    const [addstatus,setaddstatus]=useState(false);
     // console.log("data",data)
     const dispatch=useDispatch();
     // const [conditioncheckar,setconditioncheckar]=useState("false")
+    const addpopFn=()=>{
+        setaddstatus(true);
+        setTimeout(() => {
+            setaddstatus(false);
+        }, 2000);
+    }
     return(
+        <>
+        {addstatus && <Addpopup /> }
         <div className="flex flex-wrap justify-center">
             <div className="w-8/12 bg-[#f0f0f0]">
             {/* header */}
@@ -37,6 +47,7 @@ const ItemCard=({data,check,setcheck})=>{
                                 <button className="font-bold text-base py-1 bg-white text-green-600 px-4 border-[#f0f0f0] border-2 mt-[-15] rounded-md" 
                                 onClick={()=>{
                                     dispatch(addItem(menudata.card.info));
+                                    addpopFn();
                                     // dispatch and action
                                 }}
                                 >ADD</button>
@@ -50,6 +61,7 @@ const ItemCard=({data,check,setcheck})=>{
             {/* {body} */}
             </div>
         </div>
+        </>
     )
 
     
