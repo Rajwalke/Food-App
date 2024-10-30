@@ -11,6 +11,9 @@
     "type": "git",
     "url": "(https://github.com/Rajwalke/Food-App)"
   },
+  "alias": {
+  "process": "process/browser"
+  },
   "keywords": [],
   "author": "Raj Walke",
   "license": "ISC",
@@ -21,6 +24,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
+    "process": "^0.11.10",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",

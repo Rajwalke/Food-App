@@ -14,6 +14,7 @@ import Test from "./utils/Test";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
+import process from 'process';
 const About=lazy(()=>import("./components/About"));
 
 const AppLayout=()=>{
