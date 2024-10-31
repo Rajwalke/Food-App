@@ -94,7 +94,7 @@ const Header = () => {
                 </button>
 
                 {/* Desktop Menu */}
-                <div className="hidden md:flex space-x-6">
+                <div className="hidden md:flex space-x-6 text-xl font-semibold">
                     <ul className="flex items-center space-x-6 text-black">
                         <li>{connectionStatus === "online" ? "ONLINE✅" : "OFFLINE🔴"}</li>
                         <li><Link to="/" className="hover:text-gray-500">Home</Link></li>
@@ -119,7 +119,7 @@ const Header = () => {
 
             {/* Mobile Dropdown Menu */}
             <div className={`md:hidden ${menuOpen ? 'max-h-screen' : 'max-h-0 overflow-hidden'} transition-max-height duration-300 ease-in-out mt-2`}>
-                <ul className="text-center text-black space-y-4 p-4 bg-gray-100 rounded shadow-md">
+                <ul className="text-center text-black space-y-4 p-4 bg-gray-100 rounded shadow-md text-xl font-semibold">
                     <li>{connectionStatus === "online" ? "ONLINE✅" : "OFFLINE🔴"}</li>
                     <li><Link to="/" className="block hover:text-gray-500">Home</Link></li>
                     <li><Link to="/About" className="block hover:text-gray-500">About Us</Link></li>
