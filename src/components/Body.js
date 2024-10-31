@@ -42,7 +42,31 @@ const Body=()=>{
     }
     return (
         
+
         <div className="body mx-10 my-10">
+            <div className="searchBar flex-shrink-0 flex items-center">
+                <input
+                    type="text"
+                    className="filter-btn-search w-full sm:w-64 text-base sm:text-lg border-2 px-3 py-1 text-left border-[#000000] rounded-md bg-[#f0f0f0]"
+                    value={searchtext}
+                    onChange={(input) => setsearchtext(input.target.value)}
+                />
+                <button
+                    className="filter-btn-search text-base sm:text-lg ml-2 border-2 px-3 py-1 text-center border-[#b5b5b5] rounded-md bg-green-100"
+                    onClick={() => {
+                        const filterData = resobj.filter((restro) =>
+                            restro.info.name.toLowerCase().includes(searchtext.toLowerCase())
+                        );
+                        if (filterData.length === 0) {
+                            alert("Sorry, we couldn't find any restaurant matching your search. Please try again!");
+                        } else {
+                            setrestroList(filterData);
+                        }
+                    }}
+                >
+                    Search
+                </button>
+            </div>
             {console.log("dishList",dishList)}
             {/* Dish-Slider */}
             <div className="flex overflow-x-auto whitespace-nowrap scrollbar-hide  bg-white my-10 border-1  shadow-[0_1px_50px_rgba(0,0,0,0.16)]">
@@ -63,96 +87,68 @@ const Body=()=>{
                 
                 
             </div>
-            <div className="features-Btn flex flex-wrap items-center my-10">
-                <div className="searchBar">
-                    <input type="text" className="filter-btn-search text-xl border-2 px-4 py-1 text-center border-[#000000] rounded-md bg-[#f0f0f0]" value={searchtext} onChange={(input)=>{
-                        setsearchtext(input.target.value);
-                    }}></input>
-                    <button className="filter-btn-search my-2 text-xl ml-2 border-2 px-4 py-1 text-center border-[#b5b5b5] rounded-md bg-green-100" onClick={()=>{
-                        // console.log(searchtext);
-                        const filterData=resobj.filter((restro)=>{
-                            return restro.info.name.toLowerCase().includes(searchtext.toLowerCase());
-                        })
-                        if(filterData.length === 0){
-                            alert("Sorry, we couldn't find any restaurant matching your search. Please try again !!....");
-                        }
-                        else{
-                            setrestroList(filterData);
-                        }   
-                    }}>Search</button>
-                </div>
 
-                <button className="filter-btn my-2 ml-5 text-xl border-2 px-4 py-1 text-center border-[#b5b5b5] rounded-md bg-[#f0f0f0]" 
-                onClick={()=>{
-                    const filterData=resobj.filter((res)=>{
-                        if(res.info.avgRatingString>=4.5){
-                            return res;
-                        }
-                    })
+
+{/*  filter buttons */}
+        <div className="features-Btn flex items-center my-10 p-2 rounded-lg  overflow-x-scroll space-x-3">
+
+
+            <button
+                className="filter-btn flex-shrink-0 text-base sm:text-lg border-2 px-3 py-1 text-center border-[#b5b5b5] rounded-md bg-[#f0f0f0]"
+                onClick={() => {
+                    const filterData = resobj.filter((res) => res.info.avgRatingString >= 4.5);
                     setrestroList(filterData);
                 }}
-                >Top Rated Restaurant</button>
-
-                <button className="filter-btn my-2 ml-5 text-xl border-2 px-4 py-1 text-center border-[#b5b5b5] rounded-md bg-[#f0f0f0]" onClick={()=>{
-                    setrestroList(resobj);
-                }}>All Items</button>
-
-                <button className="filter-btn my-2 ml-5 text-xl border-2 px-4 py-1 text-center border-[#b5b5b5] rounded-md bg-[#f0f0f0]" 
-                onClick={()=>{
-                    const filterData=resobj.filter((restro)=>{
-                        if(restro.info.sla.lastMileTravel<=0.5){
-                            return restro;
-                        }
-                    })
-                    if(filterData.length === 0){
-                        alert("No nearby Restaurant is avaliable")
-                    }
-                    else{
+            >
+                Top Rated
+            </button>
+            
+            <button
+                className="filter-btn flex-shrink-0 text-base sm:text-lg border-2 px-3 py-1 text-center border-[#b5b5b5] rounded-md bg-[#f0f0f0]"
+                onClick={() => setrestroList(resobj)}
+            >
+                All Items
+            </button>
+            
+            <button
+                className="filter-btn flex-shrink-0 text-base sm:text-lg border-2 px-3 py-1 text-center border-[#b5b5b5] rounded-md bg-[#f0f0f0]"
+                onClick={() => {
+                    const filterData = resobj.filter((restro) => restro.info.sla.lastMileTravel <= 0.5);
+                    if (filterData.length === 0) {
+                        alert("No nearby Restaurant is available");
+                    } else {
                         setrestroList(filterData);
                     }
-                    
-                   
-                    
                 }}
-                >
-                    Near-by Restro
-                </button>
+            >
+                Near-by
+            </button>
+            
+            <button
+                className="filter-btn flex-shrink-0 text-base sm:text-lg border-2 px-3 py-1 text-center border-[#b5b5b5] rounded-md bg-[#f0f0f0]"
+                onClick={() => {
+                    const filterData = resobj.filter((restro) => restro.info.veg === true);
+                    if (filterData.length === 0) {
+                        alert("No Pure-Veg Restaurant is available");
+                    } else {
+                        setrestroList(filterData);
+                    }
+                }}
+            >
+                Pure-Veg
+            </button>
+            
+            <button
+                className="filter-btn flex-shrink-0 text-base sm:text-lg border-2 px-3 py-1 text-center border-[#b5b5b5] rounded-md bg-[#f0f0f0]"
+                onClick={() => {
+                    const filterData = resobj.filter((rescard) => rescard?.info?.sla?.deliveryTime <= 20);
+                    setrestroList(filterData);
+                }}
+            >
+                With-In 20Mins
+            </button>
+        </div>
 
-                <button className="filter-btn my-2 ml-5 text-xl border-2 px-4 py-1 text-center border-[#b5b5b5] rounded-md bg-[#f0f0f0]"
-                    onClick={()=>{
-                        const filterData=resobj.filter((restro)=>{
-                            return restro.info.veg==true ;
-                            // if(restro.info.veg== true){
-                            //     return restro;
-                            // }
-                        })
-                        if(filterData.length === 0){
-                            alert("No Pure-Veg  Restaurant is avaliable")
-                        }
-                        else{
-                        setrestroList(filterData);
-                        }
-                    }}
-                    
-                >
-                    Pure-Veg
-                </button>
-                <button className="filter-btn my-2 ml-5 text-xl border-2 px-4 py-1 text-center border-[#b5b5b5] rounded-md bg-[#f0f0f0]"
-                 onClick={()=>{
-                        console.log("press");
-                        const filterData=resobj.filter((rescard)=>{
-                            return rescard?.info?.sla?.deliveryTime <= 20;
-                       
-                            }
-                        )
-                        setrestroList(filterData);
-                      }
-                      
-                      }>With-In 20Mins</button>
-                
-                 
-               
-            </div>
             
             <div className="flex flex-wrap flex-shrink-2 items-center">
               {
