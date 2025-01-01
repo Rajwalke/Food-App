@@ -55,7 +55,7 @@ const DishMenu=()=>{
                 {
                 
                 favdish.map((itemcard)=>(
-                   <Link key={itemcard?.card?.card?.info?.id} to={"/res/"+itemcard?.card?.card?.info?.id}><DishCard  dishdata={itemcard}/></Link> 
+                   <Link key={itemcard?.card?.card?.info?.id} to={"/app/res/"+itemcard?.card?.card?.info?.id}><DishCard  dishdata={itemcard}/></Link> 
                 ))
                 }
                 {/* <DishCard dishdata={favdish}/> */}

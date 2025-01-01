@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -7,70 +7,94 @@ import Error from "./components/Error";
 import Contact from "./components/Contact";
 import RestroMenu from "./components/RestroMenu";
 import { Outlet } from "react-router-dom";
-import { createBrowserRouter,RouterProvider } from "react-router-dom";
+import { createBrowserRouter,Navigate,RouterProvider } from "react-router-dom";
 import ShimmerUI from "./components/ShimmerUI";
 import DishMenu from "./components/DishMenu";
 import Test from "./utils/Test";
-import { Provider } from "react-redux";
+import { Provider, useDispatch,useSelector } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
 import process from 'process';
+import Login from "./components/Login";
 const About=lazy(()=>import("./components/About"));
-
+import { onAuthStateChanged } from "firebase/auth";
+import { adduserInfo, removeUserInfo } from "./utils/userSlice";
+import {auth} from "./utils/firebase"
 const AppLayout=()=>{
-    return (
-        <Provider store={appStore}>
-            <div className="app">
+    const dispatch = useDispatch()
+    useEffect(() => {
+        // const auth = getAuth(app);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const {uid, email, displayName} = user;
+                dispatch(adduserInfo({uid, email, displayName}));
+            } else {
+                dispatch(removeUserInfo()); // Fixed from disp to dispatch
+            }
+        });
+    }, [dispatch]);
 
+
+    return (
+        
+            <div className="app">
+            
                 <Header/>
                 <Outlet/>
             </div>
-        </Provider>
+
     )
 }
-const appRouter=createBrowserRouter([
-    {
-        path:"/",
-        element:<AppLayout/>,
-        children:[
-            {
-                path:"/",
-                element:<Body/>
-            },
-            {
-                path:"/About",
-                element:<Suspense fallback={<ShimmerUI/>}><About/></Suspense>
-            },
-            {
-                path:"Contact",
-                element:<Contact/>
-            },
-            {
-                path:"res/:resId",
-                element:<RestroMenu/>
 
+
+const appRouter = createBrowserRouter([
+    {
+        path: "/",
+        element: <Login />
+    },
+    {
+        path: "/app",
+        element: <AppLayout />,
+        children: [
+            {
+                path: "home",
+                element: <Body />
             },
             {
-                path:"dish/:dishId/:dishname",
-                element:<DishMenu/>
+                path: "about", // Changed from "/About" to "about"
+                element: <Suspense fallback={<ShimmerUI />}><About /></Suspense>
             },
             {
-                path:"test",
-                element:<Test/>
+                path: "contact", // Changed from "Contact" to "contact"
+                element: <Contact />
             },
             {
-                path:"/cart",
-                element:<Cart/>
+                path: "res/:resId",
+                element: <RestroMenu />
+            },
+            {
+                path: "dish/:dishId/:dishname",
+                element: <DishMenu />
+            },
+            {
+                path: "test",
+                element: <Test />
+            },
+            {
+                path: "cart", // Changed from "/cart" to "cart"
+                element: <Cart />
             }
         ],
-        errorElement:<Error/>
-    },
-    
-])
-
+        errorElement: <Error />
+    }
+]);
 
 const root=ReactDOM.createRoot(document.querySelector("#root"));
-root.render(<RouterProvider router={appRouter}/>);
+root.render(
+<Provider store={appStore}>
+<RouterProvider router={appRouter}/>
+</Provider>
+);
 // const heading=React.createElement("h1",{id:"heading"},"Nmaste React");
 // const Title=(
 

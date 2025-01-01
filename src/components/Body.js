@@ -11,6 +11,7 @@ const Body=()=>{
     const [resobj,setresobj]=useState([]);
     const [searchtext,setsearchtext]=useState("");
     const [dishList,setdishList]=useState([]);
+    // const dispatch=useDispatch();
     // console.log("body render",restroList);
     const fetchData= async ()=>{
         const apiData=await fetch("https://cors-handlers.vercel.app/api/?url=https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D19.113645%26lng%3D72.8697339%26is-seo-homepage-enabled%3Dtrue%26page_type%3DDESKTOP_WEB_LISTING");
@@ -31,10 +32,11 @@ const Body=()=>{
     }
     useEffect(()=>{
         fetchData();
-    },[])
+    },[]);
     // console.log(restroList);
     // console.log("setlist",dishList);
     
+
     const connectionStatus=useOnline();
     if(connectionStatus === "offline") return <h1>Looks like you're offline!!....please check internet connection</h1>
     if(!restroList || restroList.length ===0 ){
@@ -69,7 +71,7 @@ const Body=()=>{
             </div>
             {console.log("dishList",dishList)}
             {/* Dish-Slider */}
-            <div className="flex overflow-x-auto whitespace-nowrap scrollbar-hide  bg-white my-10 border-1  shadow-[0_1px_50px_rgba(0,0,0,0.16)]">
+            <div className="flex overflow-x-auto whitespace-nowrap scrollbar-hide w-full  bg-white my-10 border-1  shadow-[0_1px_50px_rgba(0,0,0,0.16)]">
                 {
                     dishList.map((dish,index)=>{
                         // const firstItemEntityId = dishList[0].entityId;
@@ -78,8 +80,8 @@ const Body=()=>{
                         const collectionId = dish.entityId.match(/collection_id=(\d+)/)?.[1];
 
                         return(
-                       <Link key={dish.id}  to={"/dish/"+collectionId+"/"+dish.description}>
-                        <img className="w-48 object-cover mx-20 flex-shrink-0" src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/" + dish.imageId} alt={dish.description}></img>
+                       <Link key={dish.id}  to={"/app/dish/"+collectionId+"/"+dish.description}>
+                        <img className=" object-cover mx-16 p-5 flex-shrink-0" src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/" + dish.imageId} alt={dish.description}></img>
                         </Link> 
                         )
                     })
@@ -153,7 +155,7 @@ const Body=()=>{
             <div className="flex flex-wrap flex-shrink-2 items-center">
               {
                  restroList.map((restaurant,index)=>(
-                 <Link className="link-page" key={restaurant.info.id} to={"/res/"+restaurant.info.id}><RestaurantCard resData={restaurant}/></Link> 
+                 <Link className="link-page" key={restaurant.info.id} to={"/app/res/"+restaurant.info.id}><RestaurantCard resData={restaurant}/></Link> 
                  ))
               }
                 

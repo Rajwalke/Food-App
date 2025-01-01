@@ -49,20 +49,32 @@
 // export default Header;
 import { LOGO_URL } from "../utils/constant";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useOnline from "../utils/useOnline";
 import { useSelector } from 'react-redux';
-
+import { signOut } from "firebase/auth";
+import {auth} from "../utils/firebase"
 const Header = () => {
     const [loginBtn, setLoginBtn] = useState("Login");
     const [menuOpen, setMenuOpen] = useState(false);
 
     const connectionStatus = useOnline();
     const cartItems = useSelector((store) => store.cart.items);
-
+    const nevigate=useNavigate();
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
-    };
+    }
+
+
+    const NeviagteToForm=()=>{
+        // const auth = getAuth(app);
+        signOut(auth).then(() => {
+          // Sign-out successful.
+          nevigate("/")
+        }).catch((error) => {
+          // An error happened.
+        });
+    }
 
     return (
         <nav className="p-4 border-2 border-black/16 shadow-[0_1px_50px_rgba(0,0,0,0.16)]">
@@ -97,20 +109,24 @@ const Header = () => {
                 <div className="hidden md:flex space-x-6 text-xl font-semibold">
                     <ul className="flex items-center space-x-6 text-black">
                         <li>{connectionStatus === "online" ? "ONLINE✅" : "OFFLINE🔴"}</li>
-                        <li><Link to="/" className="hover:text-gray-500">Home</Link></li>
-                        <li><Link to="/About" className="hover:text-gray-500">About Us</Link></li>
-                        <li><Link to="/Contact" className="hover:text-gray-500">Contact Us</Link></li>
+                        <li><Link to="/app/home" className="hover:text-gray-500">Home</Link></li>
+                        <li><Link to="/app/about" className="hover:text-gray-500">About Us</Link></li>
+                        <li><Link to="/app/contact" className="hover:text-gray-500">Contact Us</Link></li>
                         <li>
-                            <Link to="/cart" className="hover:text-gray-500">
+                            <Link to="/app/cart" className="hover:text-gray-500">
                                 Cart ({cartItems.length} Items)
                             </Link>
                         </li>
                         <li>
                             <button
-                                className="px-4 py-2 border-2 border-gray-500 font-semibold hover:bg-gray-700 hover:text-white transition-colors duration-200"
-                                onClick={() => setLoginBtn(loginBtn === "Login" ? "Logout" : "Login")}
+                                className="px-4 py-2 text-xl border-2 rounded-md  font-semibold hover:bg-gray-700 hover:text-white transition-colors duration-200"
+                                onClick={() =>{
+                                    //  setLoginBtn(loginBtn === "Login" ? setLoginBtn("LogOUt") : setLoginBtn("LogOut"));
+                                     NeviagteToForm();
+                                    }
+                                    }
                             >
-                                {loginBtn}
+                                LogOut
                             </button>
                         </li>
                     </ul>
@@ -121,18 +137,22 @@ const Header = () => {
             <div className={`md:hidden ${menuOpen ? 'max-h-screen' : 'max-h-0 overflow-hidden'} transition-max-height duration-300 ease-in-out mt-2`}>
                 <ul className="text-center text-black space-y-4 p-4 bg-gray-100 rounded shadow-md text-xl font-semibold">
                     <li>{connectionStatus === "online" ? "ONLINE✅" : "OFFLINE🔴"}</li>
-                    <li><Link to="/" className="block hover:text-gray-500">Home</Link></li>
-                    <li><Link to="/About" className="block hover:text-gray-500">About Us</Link></li>
-                    <li><Link to="/Contact" className="block hover:text-gray-500">Contact Us</Link></li>
+                    <li><Link to="/app/home" className="block hover:text-gray-500">Home</Link></li>
+                    <li><Link to="/app/about" className="block hover:text-gray-500">About Us</Link></li>
+                    <li><Link to="/app/contact" className="block hover:text-gray-500">Contact Us</Link></li>
                     <li>
-                        <Link to="/cart" className="block hover:text-gray-500">
+                        <Link to="/app/cart" className="block hover:text-gray-500">
                             Cart ({cartItems.length} Items)
                         </Link>
                     </li>
                     <li>
                         <button
                             className="py-2 px-3 border-2 border-gray-500 font-semibold hover:bg-gray-700 hover:text-white transition-colors duration-200"
-                            onClick={() => setLoginBtn(loginBtn === "Login" ? "Logout" : "Login")}
+                            onClick={() =>{
+                                setLoginBtn(loginBtn === "Login" ? "Logout" : "Login");
+                                NeviagteToForm();
+                               }
+                               }
                         >
                             {loginBtn}
                         </button>
