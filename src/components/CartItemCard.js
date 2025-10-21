@@ -1,9 +1,15 @@
 import { CDN_DISH_IMG_URL } from "../utils/constant";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { removespecific } from "../utils/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addItemExtra, removespecific, subItemExtra } from "../utils/cartSlice";
 const CartItemCard=({data,index})=>{
+    const dispatch1=useDispatch();
+    const dispatch2=useDispatch();
     const itemremove=useDispatch()
+    const [itemCount,setItemCount]=useState(1);
+    if(itemCount===0){
+        itemremove(removespecific(index))
+    }
     return(
         <div className="flex justify-center">
             
@@ -19,6 +25,39 @@ const CartItemCard=({data,index})=>{
                     itemremove(removespecific(index))
                 }}
                 >remove</button></h2>    
+                <div className="flex items-center gap-3 bg-white shadow-md rounded-2xl px-2 py-1 my-2 w-fit">
+                    <button
+                      className="bg-red-500 text-white text-md font-bold w-6 h-6 rounded-full flex items-center justify-center 
+                                 hover:bg-red-600 active:scale-95 transition-all duration-200"
+                      onClick={() =>{
+                        setItemCount(itemCount - 1);
+                        if(itemCount>1){
+                            // parseFloat((data?.defaultPrice/100 || data?.price/100).toFixed(2))
+                            dispatch1(subItemExtra(data?.defaultPrice/100 || data?.price/100));
+                        }
+                      }}
+                    >
+                      −
+                    </button>
+                    <input className="text-md font-semibold text-gray-800 w-14 text-center" type="number" value={itemCount} 
+                    min="0" max="50"
+                    onChange={(e)=>{
+                        setItemCount(e.target.value);
+                        
+                    }}
+                    />
+                    <button
+                      className="bg-green-500 text-white text-md font-bold w-6 h-6 rounded-full flex items-center justify-center 
+                                 hover:bg-green-600 active:scale-95 transition-all duration-200"
+                      onClick={() => {
+                        setItemCount(itemCount + 1);
+                        dispatch2(addItemExtra(data?.defaultPrice/100 || data?.price/100));
+                      }}
+                    >
+                      +
+                    </button>
+                </div>
+
                 
             </div>
            

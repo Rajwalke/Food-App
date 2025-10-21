@@ -6,6 +6,9 @@ const cartSlice=createSlice({
     name:"cart",
     initialState:{
         items:[],
+        extraadd:0,
+        extrasub:0,
+        finalTotal:0
     },
     reducers:{
         addItem:(state,action)=>{
@@ -20,9 +23,18 @@ const cartSlice=createSlice({
         },
         removespecific:(state,action)=>{
             state.items.splice(action.payload,1);
-        }
+        },
+        addItemExtra:(state,action)=>{
+            state.finalTotal +=action.payload;
+        },
+        subItemExtra:(state,action)=>{
+            state.finalTotal -=action.payload;
+        },
+        // addFinalTotal:(state,action)=>{
+        //     state.finalTotal=action.payload;
+        // }
     },
 });
 
-export const{addItem,removeItem,clearCart,removespecific}=cartSlice.actions
+export const{addItem,removeItem,clearCart,removespecific,addItemExtra,subItemExtra,addFinalTotal}=cartSlice.actions
 export default cartSlice.reducer;

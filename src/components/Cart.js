@@ -11,6 +11,8 @@ const Cart=()=>{
     const [total,settotal]=useState(0);
     const [status,setstatus]=useState(false);
     const removeAll=useDispatch();
+    const addvalue=useSelector((store)=>store.cart.extraadd);
+    const finaltotoal=useSelector((store)=>store.cart.finalTotal);
     useEffect(()=>{
         
         const totalPrice = cartItemlist.reduce((acc, cart) => {
@@ -18,10 +20,15 @@ const Cart=()=>{
             const price = cart?.defaultPrice/100 || cart?.price/100 || 0;
             return acc + price ;  
         }, 0);
+        const a=parseFloat(totalPrice.toFixed(2));
 
-        settotal(parseFloat(totalPrice.toFixed(2)));
+        settotal(a+finaltotoal);
         
-    },[cartItemlist])
+    },[cartItemlist,finaltotoal]);
+    
+    // useEffect(()=>{
+    //     settotal(total+addvalue);
+    // },[addvalue]);
    
     // const [itemlist,setitemList]=useState(null);
     // setitemList(cartItemlist);
